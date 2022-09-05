@@ -1,6 +1,6 @@
 import markersData from '../assets/markersData.json'
 
-const getAllData = () => {
+export const getAllData = () => {
     const tramMarkers = markersData.markers
         .filter(marker => marker.type === 'Tram')
         .map(marker => marker.position)
@@ -11,7 +11,7 @@ const getAllData = () => {
     let bikeMarkersAmounts = []
     markersData.markers
         .filter(marker => marker.type === 'Bike')
-        .map(marker => {
+        .forEach(marker => {
             bikeMarkersPositions.push(marker.position)
             bikeMarkersAmounts.push(marker.bikeAmount)
         })
@@ -25,26 +25,26 @@ const getAllData = () => {
     }
 }
 
-const getTramsData = () => {
+export const getTramsData = () => {
     const tramMarkers = markersData.markers
         .filter(marker => marker.type === 'Tram')
         .map(marker => marker.position)
     return tramMarkers
 }
 
-const getCrosswalksData = () => {
+export const getCrosswalksData = () => {
     const crosswalkMarkers = markersData.markers
         .filter(marker => marker.type === 'Crosswalk')
         .map(marker => marker.position)
     return crosswalkMarkers
 }
 
-const getBikesData = () => {
+export const getBikesData = () => {
     let bikeMarkersPositions = []
     let bikeMarkersAmounts = []
     markersData.markers
         .filter(marker => marker.type === 'Bike')
-        .map(marker => {
+        .forEach(marker => {
             bikeMarkersPositions.push(marker.position)
             bikeMarkersAmounts.push(marker.bikeAmount)
         })
@@ -53,5 +53,3 @@ const getBikesData = () => {
         bikeAmounts: bikeMarkersAmounts
     }
 }
-
-export default { getAllData, getTramsData, getCrosswalksData, getBikesData }

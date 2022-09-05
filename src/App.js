@@ -1,7 +1,7 @@
 import './App.css'
 import React, { useEffect, useRef, useState } from 'react'
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
-import markersService from './services/markersdata.js'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import { getAllData } from './services/markersdata.js'
 import Markers from './components/Markers'
 import ThemeToggle from './components/ThemeToggle'
 import Controls from './components/Controls'
@@ -38,13 +38,6 @@ function App() {
   const mapRef = useRef()
 
   // Fetch para obtener los datos de los marcadores
-  // useEffect(() => {
-  //   fetch('/data/markersData.json')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setPositionData(data)
-  //     })
-  // }, [isSelected])
 
   useEffect(() => {
     if (tilesRef.current) {
@@ -52,10 +45,10 @@ function App() {
     }
     if (darkMode) setTiles(darkTiles)
     else setTiles(lightTiles)
-  }, [darkMode])
+  }, [darkMode, tiles])
 
   useEffect(() => {
-    const allMarkers = markersService.getAllData()
+    const allMarkers = getAllData()
 
     setMarkers({
       tram: {
@@ -72,7 +65,7 @@ function App() {
         bikeAmounts: allMarkers.bike.bikeAmounts
       }
     })
-  }, [isSelected])
+  }, [isSelected, markers])
 
   const handleThemeChange = () => {
     const legend = document.querySelector('.legend')

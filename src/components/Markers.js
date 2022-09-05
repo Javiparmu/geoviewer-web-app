@@ -30,7 +30,7 @@ export default function Markers({ isSelected, markers, handleMarkerClick }) {
     const getClosestStation = (placedMarkerPosition) => {
         let shortestDistance = 9999999
         let closestStation = null
-        tramStations.map(station => {
+        tramStations.forEach(station => {
             const distance = placedMarkerPosition.distanceTo(station.position)
             if (distance < shortestDistance) {
                 shortestDistance = distance
