@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Marker, Popup, useMap } from 'react-leaflet'
 import { tramStations } from '../assets/tramStations'
 import { muybicis } from '../assets/muybicis.js'
-import { tramStationIcon, tramIcon, crosswalkIcon, bikeIcon, noBikesIcon } from '../resources/Icons'
+import { getCustomMarkerIcon } from '../helpers/getCustomMarkerIcon'
 
 export default function Markers({ isSelected, markers, handleMarkerClick }) {
     const [userLocation, setUserLocation] = useState(null)
@@ -75,7 +75,7 @@ export default function Markers({ isSelected, markers, handleMarkerClick }) {
             {
                 tramStations.map((station, index) => {
                     return (
-                        <Marker key={index} position={station.position} icon={tramStationIcon}>
+                        <Marker key={index} position={station.position} icon={getCustomMarkerIcon('tram-station')}>
                             <Popup>
                                 <span>Estación: {station.name}</span>
                             </Popup>
@@ -89,7 +89,7 @@ export default function Markers({ isSelected, markers, handleMarkerClick }) {
                     <Marker
                         key={'t' + index}
                         position={position}
-                        icon={tramIcon}
+                        icon={getCustomMarkerIcon('tram')}
                     >
                         <Popup key={'tp' + index} >
                             Tranvía.
@@ -109,7 +109,7 @@ export default function Markers({ isSelected, markers, handleMarkerClick }) {
                     <Marker
                         key={'c' + index}
                         position={position}
-                        icon={crosswalkIcon}
+                        icon={getCustomMarkerIcon('crosswalk')}
                     >
                         <Popup key={'cp' + index}>
                             Paso de peatones.
@@ -129,7 +129,7 @@ export default function Markers({ isSelected, markers, handleMarkerClick }) {
                     <Marker
                         key={'b' + index}
                         position={bike.position}
-                        icon={bike.bikeAmount !== 0 ? bikeIcon : noBikesIcon}
+                        icon={bike.bikeAmount !== 0 ? getCustomMarkerIcon('bike') : getCustomMarkerIcon('nobikes')}
                     >
                         <Popup key={'bp' + index}>
                             <span style={{ fontSize: 16, fontWeight: 'bold' }}>{bike.name}</span>

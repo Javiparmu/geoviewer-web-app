@@ -17,6 +17,19 @@
   filter: var(--leaflet-tile-filter, none);
 }
 
+.leaflet-div-icon {
+  display: grid;
+  place-items: center;
+  background-color: transparent;
+  border-color: transparent;
+  margin-left: -19px !important;
+}
+
+.leaflet-div-icon > svg {
+  width: 2.1rem;
+  padding: 1.5px;
+}
+
 .controls {
   position: absolute;
   top: calc(50vh - var(--legend-height) / 2);
@@ -142,7 +155,7 @@
   border-radius: 50%;
 }
 
-.walking-icon {
+.crosswalk-icon {
   background-color: #8cbbf1;
   border-radius: 50%;
 }
