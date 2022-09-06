@@ -12,7 +12,6 @@ const lightTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
-  const [tiles, setTiles] = useState('light')
 
   const [isSelected, setSelected] = useState({
     tram: false,
@@ -41,12 +40,10 @@ function App() {
     let tileElements = document.getElementsByClassName('leaflet-tile')
     if ( tileElements.length === 0 ) return
     if (darkMode) {
-      setTiles('dark')
       for (let element of tileElements) {
         element.classList.add('dark-tiles')
       }
     } else {
-      setTiles('light')
       for (let element of tileElements) {
         element.classList.contains('dark-tiles') &&
         element.classList.remove('dark-tiles')
