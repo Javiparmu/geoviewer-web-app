@@ -5,8 +5,6 @@ import TramIcon from '@mui/icons-material/Tram';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 
-const iconSize = '50px'
-
 export const getCustomMarkerIcon = ( iconName ) => {
 
     const iconMarkup = renderToStaticMarkup(
