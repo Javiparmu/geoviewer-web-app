@@ -8,12 +8,11 @@ import Controls from './components/Controls'
 
 const mapCenter = [37.992277870495116, -1.1305234429857096]
 
-const darkTiles = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
 const lightTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
-  const [tiles, setTiles] = useState(lightTiles)
+  const [tiles, setTiles] = useState('light')
 
   const [isSelected, setSelected] = useState({
     tram: false,
@@ -34,18 +33,26 @@ function App() {
     }
   })
 
-  const tilesRef = useRef()
   const mapRef = useRef()
 
   // Fetch para obtener los datos de los marcadores
 
   useEffect(() => {
-    if (tilesRef.current) {
-      tilesRef.current.setUrl(tiles === lightTiles ? darkTiles : lightTiles)
+    let tileElements = document.getElementsByClassName('leaflet-tile')
+    if ( tileElements.length === 0 ) return
+    if (darkMode) {
+      setTiles('dark')
+      for (let element of tileElements) {
+        element.classList.add('dark-tiles')
+      }
+    } else {
+      setTiles('light')
+      for (let element of tileElements) {
+        element.classList.contains('dark-tiles') &&
+        element.classList.remove('dark-tiles')
+      }
     }
-    if (darkMode) setTiles(darkTiles)
-    else setTiles(lightTiles)
-  }, [darkMode, tiles])
+  }, [darkMode])
 
   useEffect(() => {
     const allMarkers = getAllData()
@@ -65,7 +72,7 @@ function App() {
         bikeAmounts: allMarkers.bike.bikeAmounts
       }
     })
-  }, [isSelected, markers])
+  }, [isSelected])
 
   const handleThemeChange = () => {
     const legend = document.querySelector('.legend')
@@ -115,7 +122,6 @@ function App() {
         doubleClickZoom={false}
         ref={mapRef}>
         <TileLayer
-          ref={tilesRef}
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={lightTiles}
         />

@@ -1,6 +1,7 @@
 :root {
   --legend-width: 5.5vw;
   --legend-height: 19vh;
+  --leaflet-tile-filter: brightness(0.6) invert(1) contrast(2) hue-rotate(200deg) saturate(0.25) brightness(0.55);
 }
 
 .main {
@@ -12,10 +13,16 @@
   width: 100vw; 
 }
 
+.dark-tiles {
+  filter: var(--leaflet-tile-filter, none);
+}
+
 .controls {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: absolute;
+  top: calc(50vh - var(--legend-height) / 2);
+  right: 0.4rem;
+  display: grid;
+  place-items: center;
 }
 
 .checkbox {
@@ -79,11 +86,9 @@
 }
 
 .legend {
+  display: grid;
+  place-items: center;
   opacity: 0.95;
-  position: absolute;
-  top: calc(50vh - var(--legend-height) / 2);
-  right: 0.4rem;
-  height: var(--legend-height);
   background-color: #f9fafe;
   padding: 0.5rem;
   list-style: none;
